@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     private float distance = 2f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
-    public float sensivity = 100.0f;
+    public float sensivity = 170.0f;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         currentX += Input.GetAxis("Mouse X") * sensivity * Time.deltaTime;
-        currentY += Input.GetAxis("Mouse Y") * sensivity * Time.deltaTime;
+        currentY += Input.GetAxis("Mouse Y") * sensivity * 0.7f * Time.deltaTime;
 
         currentY = Mathf.Clamp(currentY, YMin, YMax);
 
