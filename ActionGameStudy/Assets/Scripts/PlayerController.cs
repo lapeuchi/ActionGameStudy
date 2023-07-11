@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed = 5;
+    [SerializeField] float speed = 0;
+    [SerializeField] float runSpeed = 10;
+    [SerializeField] float walkSpeed = 5;
+
     [SerializeField] float jumpForce = 3;
     [SerializeField] float hp = 1;
     [SerializeField] float atk = 1;
@@ -43,6 +46,47 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             rigidbody.velocity = new Vector3(movement.x, 0, movement.z);
+            if (Input.GetButton("Run"))
+            {
+                speed = runSpeed;
+                animator.SetFloat("Velocity", 1f);
+            }
+            else
+            {
+                speed = walkSpeed;
+                animator.SetFloat("Velocity", 0.5f);
+            }
+
+            transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * playerCamera.GetComponent<CameraController>().sensivity * Time.deltaTime);
+            if (movement.magnitude != 0f)
+            {
+                if (!animator.GetBool("Moving"))
+                {
+                    animator.SetBool("Moving", true);
+                }
+
+                Quaternion CamRotation = playerCamera.transform.rotation;
+                CamRotation.x = 0f;
+                CamRotation.z = 0f;
+
+                transform.rotation = Quaternion.Lerp(transform.rotation, CamRotation, 0.1f);
+            }
+            else
+            {
+                if (animator.GetBool("Moving"))
+                {
+                    animator.SetBool("Moving", false);
+                    animator.SetFloat("Velocity", 0);
+                }
+
+            }
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+                animator.SetInteger("Jumping", 1);
+            }
+
         }
         else
         {
@@ -50,27 +94,11 @@ public class PlayerController : MonoBehaviour
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, yVelocity, rigidbody.velocity.z);
         }
         
-        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * playerCamera.GetComponent<CameraController>().sensivity * Time.deltaTime);
-        if (movement.magnitude != 0f)
-        {
-            Quaternion CamRotation = playerCamera.transform.rotation;
-            CamRotation.x = 0f;
-            CamRotation.z = 0f;
-
-            transform.rotation = Quaternion.Lerp(transform.rotation, CamRotation, 0.1f);
-            
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-            animator.SetInteger("Jumping", 1);
-        }
-
         if (Input.GetButtonDown("Fire1"))
         {
             Attack();    
         }
+        
     }
 
     void Attack()
