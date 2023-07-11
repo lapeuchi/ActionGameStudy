@@ -15,10 +15,12 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private Animator _animator;
+    private Transform firePoint;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+        firePoint = GameObject.Find("FirePoint").transform;
     }
     
     void Update()
