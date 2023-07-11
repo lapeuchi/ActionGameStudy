@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float runSpeed = 10;
     [SerializeField] float walkSpeed = 5;
 
-    [SerializeField] float jumpForce = 3;
+    [SerializeField] float jumpForce = 6;
     [SerializeField] float hp = 1;
     [SerializeField] float atk = 1;
 
@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     float gravityScale = -9.8f;
     [SerializeField] float yVelocity = 0;
     [SerializeField] bool isGrounded;
+
+    float hAxis;
+    float vAxis;
 
     private void Awake()
     {
@@ -36,15 +39,22 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void Update()
+    void InputKey()
     {
-        float horizontal = Input.GetAxis("Horizontal") * speed;
-        float vertical = Input.GetAxis("Vertical") * speed;
+        hAxis = Input.GetAxis("Horizontal") * speed;
+        vAxis = Input.GetAxis("Vertical") * speed;
+    }
 
-        Vector3 movement = playerCamera.transform.right * horizontal + playerCamera.transform.forward * vertical;
+    void Move()
+    {
 
+    }
+
+    private void FixedUpdate()
+    {
         if (isGrounded)
         {
+            Vector3 movement = playerCamera.transform.right * hAxis + playerCamera.transform.forward * vAxis;
             rigidbody.velocity = new Vector3(movement.x, 0, movement.z);
             if (Input.GetButton("Run"))
             {
@@ -68,7 +78,7 @@ public class PlayerController : MonoBehaviour
                 Quaternion CamRotation = playerCamera.transform.rotation;
                 CamRotation.x = 0f;
                 CamRotation.z = 0f;
-
+                
                 transform.rotation = Quaternion.Lerp(transform.rotation, CamRotation, 0.1f);
             }
             else
@@ -78,13 +88,14 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Moving", false);
                     animator.SetFloat("Velocity", 0);
                 }
-
             }
 
             if (Input.GetButtonDown("Jump"))
             {
-                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+                yVelocity = jumpForce;
+                
                 animator.SetInteger("Jumping", 1);
+      
             }
 
         }
@@ -93,12 +104,16 @@ public class PlayerController : MonoBehaviour
             yVelocity += gravityScale * Time.deltaTime;
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, yVelocity, rigidbody.velocity.z);
         }
-        
+
         if (Input.GetButtonDown("Fire1"))
         {
-            Attack();    
+            Attack();
         }
-        
+    }
+
+    void Update()
+    {
+        InputKey();
     }
 
     void Attack()

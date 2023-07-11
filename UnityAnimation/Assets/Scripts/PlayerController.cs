@@ -13,14 +13,21 @@ public class PlayerController : MonoBehaviour
     bool isRun = false;
     bool isShoot = false;
 
+    private float shotTimer = 0;
+    private float shotTime = 0.2f;
+
     private Rigidbody _rigidbody;
     private Animator _animator;
     private Transform firePoint;
+
+    GameObject bulletPrefab;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         firePoint = GameObject.Find("FirePoint").transform;
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
     }
     
     void Update()
@@ -28,6 +35,7 @@ public class PlayerController : MonoBehaviour
         MoveInput();
         AnimSetBool();
         ShootAnim();
+        Shoot();
     }
 
     private void FixedUpdate()
@@ -40,7 +48,7 @@ public class PlayerController : MonoBehaviour
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
         isRun = Input.GetKey(KeyCode.LeftShift);
-        isShoot = Input.GetButtonDown("Fire1");
+        isShoot = Input.GetButton("Fire1");
     }
 
     void AnimSetBool()
@@ -62,6 +70,18 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("isShoot", true);
         else
             _animator.SetBool("isShoot", false);
+    }
+
+    void Shoot()
+    {
+        shotTimer += Time.deltaTime;
+        if (isShoot && shotTimer >= shotTime)
+        {
+            shotTimer = 0;
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            
+            bullet.GetComponent<Bullet>().Shoot(transform.forward);
+        }
     }
 
     void Move() 
