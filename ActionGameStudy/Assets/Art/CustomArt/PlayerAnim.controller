@@ -140,7 +140,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -6631200998447772893}
-    m_Position: {x: 20, y: 280, z: 0}
+    m_Position: {x: 10, y: 280, z: 0}
   m_AnyStateTransitions:
   - {fileID: -6543990451100304198}
   - {fileID: 2009421296980789430}
@@ -169,20 +169,20 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 875266058518958593}
-    m_Position: {x: 10, y: 270, z: 0}
+    m_Position: {x: 190, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8059830583006402080}
-    m_Position: {x: 200, y: 150, z: 0}
+    m_Position: {x: 250, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6210652201079942042}
-    m_Position: {x: 410, y: 170, z: 0}
+    m_Position: {x: 440, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4606842284071782927}
-    m_Position: {x: 480, y: 240, z: 0}
+    m_Position: {x: 580, y: 250, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 1910545335073551676}
-    m_Position: {x: -70, y: 170, z: 0}
+    m_Position: {x: 40, y: 180, z: 0}
   m_AnyStateTransitions:
   - {fileID: 6124728002594929199}
   - {fileID: -8332665665562415982}
@@ -193,9 +193,9 @@ AnimatorStateMachine:
     - {fileID: 5798929741152713219}
     - {fileID: -6337415122798204698}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 470, y: 100, z: 0}
-  m_EntryPosition: {x: 250, y: 90, z: 0}
-  m_ExitPosition: {x: 230, y: 20, z: 0}
+  m_AnyStatePosition: {x: 520, y: 100, z: 0}
+  m_EntryPosition: {x: 300, y: 90, z: 0}
+  m_ExitPosition: {x: 280, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 8059830583006402080}
 --- !u!1102 &-7742113389168258030
@@ -708,43 +708,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Animation Speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Velocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Jumping
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Action
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Trigger Number
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Trigger
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Sword

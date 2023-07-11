@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     float hAxis;
     float vAxis;
+    bool isRun;
+    bool isJump;
 
     private void Awake()
     {
@@ -41,20 +43,17 @@ public class PlayerController : MonoBehaviour
 
     void InputKey()
     {
-        hAxis = Input.GetAxis("Horizontal") * speed;
-        vAxis = Input.GetAxis("Vertical") * speed;
+        hAxis = Input.GetAxis("Horizontal");
+        vAxis = Input.GetAxis("Vertical");
+        isJump = Input.GetButtonDown("Jump");
     }
 
     void Move()
     {
-
-    }
-
-    private void FixedUpdate()
-    {
         if (isGrounded)
         {
-            Vector3 movement = playerCamera.transform.right * hAxis + playerCamera.transform.forward * vAxis;
+            Vector3 movement = (playerCamera.transform.right * hAxis + playerCamera.transform.forward * vAxis) * speed;
+            
             rigidbody.velocity = new Vector3(movement.x, 0, movement.z);
             if (Input.GetButton("Run"))
             {
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour
                 Quaternion CamRotation = playerCamera.transform.rotation;
                 CamRotation.x = 0f;
                 CamRotation.z = 0f;
-                
+
                 transform.rotation = Quaternion.Lerp(transform.rotation, CamRotation, 0.1f);
             }
             else
@@ -93,9 +92,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 yVelocity = jumpForce;
-                
                 animator.SetInteger("Jumping", 1);
-      
             }
 
         }
@@ -104,6 +101,11 @@ public class PlayerController : MonoBehaviour
             yVelocity += gravityScale * Time.deltaTime;
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, yVelocity, rigidbody.velocity.z);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -135,6 +137,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            isJump = false;
             isGrounded = false;
         }
     }
