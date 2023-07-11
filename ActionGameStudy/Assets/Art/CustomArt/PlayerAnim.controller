@@ -130,17 +130,17 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5084134696414856742}
-    m_Position: {x: 450, y: 150, z: 0}
+    m_Position: {x: 380, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4304620641748309681}
-    m_Position: {x: 190, y: 170, z: 0}
+    m_Position: {x: 20, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -291209539789487032}
-    m_Position: {x: 280, y: 290, z: 0}
+    m_Position: {x: 400, y: 270, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -6631200998447772893}
-    m_Position: {x: -100, y: 170, z: 0}
+    m_Position: {x: 20, y: 280, z: 0}
   m_AnyStateTransitions:
   - {fileID: -6543990451100304198}
   - {fileID: 2009421296980789430}
@@ -153,8 +153,8 @@ AnimatorStateMachine:
     - {fileID: -1592727075065233291}
     - {fileID: 7657549078026556922}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 450, y: 90, z: 0}
-  m_EntryPosition: {x: 210, y: 100, z: 0}
+  m_AnyStatePosition: {x: 400, y: 20, z: 0}
+  m_EntryPosition: {x: 210, y: 70, z: 0}
   m_ExitPosition: {x: 210, y: 30, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 4304620641748309681}
@@ -258,26 +258,26 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jumping
+  m_Name: Jump
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6302044637715775234}
-    m_Position: {x: 230, y: 170, z: 0}
+    m_Position: {x: -70, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5169188930235635917}
-    m_Position: {x: 230, y: 220, z: 0}
+    m_Position: {x: 150, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5678299407472150476}
-    m_Position: {x: 230, y: 120, z: 0}
+    m_Position: {x: 220, y: 130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 20, y: 170, z: 0}
-  m_EntryPosition: {x: 250, y: 70, z: 0}
-  m_ExitPosition: {x: 250, y: 300, z: 0}
-  m_ParentStateMachinePosition: {x: 230, y: 20, z: 0}
+  m_AnyStatePosition: {x: -50, y: 240, z: 0}
+  m_EntryPosition: {x: 190, y: 80, z: 0}
+  m_ExitPosition: {x: 170, y: 320, z: 0}
+  m_ParentStateMachinePosition: {x: -10, y: 60, z: 0}
   m_DefaultState: {fileID: -5678299407472150476}
 --- !u!1101 &-6543990451100304198
 AnimatorStateTransition:
@@ -611,12 +611,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Jumping
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: Trigger Number
-    m_EventTreshold: 1
-  - m_ConditionMode: 1
-    m_ConditionEvent: Trigger
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5169188930235635917}
   m_Solo: 0
@@ -714,43 +708,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Animation Speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Velocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jumping
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Action
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Trigger Number
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Trigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Sword
@@ -939,12 +933,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Jumping
     m_EventTreshold: 1
-  - m_ConditionMode: 6
-    m_ConditionEvent: Trigger Number
-    m_EventTreshold: 1
-  - m_ConditionMode: 1
-    m_ConditionEvent: Trigger
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5678299407472150476}
   m_Solo: 0
@@ -1123,12 +1111,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: Jumping
     m_EventTreshold: 2
-  - m_ConditionMode: 6
-    m_ConditionEvent: Trigger Number
-    m_EventTreshold: 1
-  - m_ConditionMode: 1
-    m_ConditionEvent: Trigger
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6302044637715775234}
   m_Solo: 0
