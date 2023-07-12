@@ -17,26 +17,24 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidbody;
     Animator animator;
     
-    float gravityScale = -9.8f;
+     [SerializeField] float gravityScale = -9.8f;
     [SerializeField] float yVelocity = 0;
     [SerializeField] bool isGrounded;
 
     float hAxis;
     float vAxis;
 
-    float InputVector;
-
-    bool isRun;
-    bool isWalk;
-    bool isJump;
-    bool isAttack;
+    [SerializeField] bool isRun;
+    [SerializeField] bool isWalk;
+    [SerializeField] bool isJump;
+    [SerializeField] bool isAttack;
 
     private void Awake()
     {
         playerCamera = GetComponent<CameraController>();
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
+        
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
         rigidbody.useGravity = false;
         playerCamera = GameObject.Find("PlayerCamera").GetComponent<CameraController>();
@@ -60,7 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
-        isJump = Input.GetButtonDown("Jump");
+        if (Input.GetButtonDown("Jump"))
+            isJump = true;
 
         isAttack = Input.GetButtonDown("Fire1");
         if (Input.GetButton("Run"))
@@ -101,10 +100,11 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("isJump");
             }
             //animator.SetFloat("yVelocity", 0);
-            animator.SetBool("isGrounded", false);
+            animator.SetBool("isGrounded", true);
         }
         else
         {
+            animator.SetBool("isGrounded", false);
             animator.SetFloat("yVelocity", yVelocity);
         }
         
@@ -134,6 +134,11 @@ public class PlayerController : MonoBehaviour
                 speed = Mathf.Lerp(speed, 0, 0.5f);
             }
             Vector3 movement = (playerCamera.transform.right * hAxis + playerCamera.transform.forward * vAxis).normalized * speed;
+            
+            if (isJump)
+            {
+                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
             rigidbody.velocity = new Vector3(movement.x, rigidbody.velocity.y, movement.z);
 
             Quaternion CamRotation = playerCamera.transform.rotation;
@@ -141,17 +146,11 @@ public class PlayerController : MonoBehaviour
             CamRotation.z = 0f;
 
             transform.rotation = Quaternion.Lerp(transform.rotation, CamRotation, 0.1f);
-
-            if (isJump)
-            {
-                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-
         }
         else
         {
             yVelocity += gravityScale * Time.deltaTime;
-            rigidbody.velocity = new Vector3(rigidbody.velocity.x, yVelocity, rigidbody.velocity.z);
+            rigidbody.velocity = new Vector3(rigidbody.velocity.x, yVelocity + rigidbody.velocity.y, rigidbody.velocity.z);
         }
     }
 
@@ -175,8 +174,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
-        {
-            isJump = false;
+        {       
             isGrounded = false;
         }
     }

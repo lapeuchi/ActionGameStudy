@@ -694,8 +694,13 @@ MonoBehaviour:
   jumpForce: 15
   hp: 1
   atk: 1
+  gravityScale: -9.8
   yVelocity: 0
   isGrounded: 0
+  isRun: 0
+  isWalk: 0
+  isJump: 0
+  isAttack: 0
 --- !u!136 &959999795
 CapsuleCollider:
   m_ObjectHideFlags: 0
