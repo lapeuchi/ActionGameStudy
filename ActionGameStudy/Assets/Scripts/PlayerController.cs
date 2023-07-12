@@ -58,8 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
-        if (Input.GetButtonDown("Jump"))
-            isJump = true;
+        isJump = Input.GetButtonDown("Jump");
 
         isAttack = Input.GetButtonDown("Fire1");
         if (Input.GetButton("Run"))
@@ -99,7 +98,7 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetTrigger("isJump");
             }
-            //animator.SetFloat("yVelocity", 0);
+            animator.SetFloat("yVelocity", 0);
             animator.SetBool("isGrounded", true);
         }
         else
@@ -137,7 +136,7 @@ public class PlayerController : MonoBehaviour
             
             if (isJump)
             {
-                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                
             }
             rigidbody.velocity = new Vector3(movement.x, rigidbody.velocity.y, movement.z);
 
